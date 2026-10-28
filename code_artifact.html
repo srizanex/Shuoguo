@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>硕果国际物流 - 中美华人集运与跨境物流专家</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            dark: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans SC"', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1d4ed8 100%);
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(29, 78, 216, 0.1), 0 10px 10px -5px rgba(29, 78, 216, 0.04);
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- 顶部公告栏 -->
+    <div class="bg-brand-900 text-slate-300 text-xs py-2 px-4 border-b border-brand-800/50">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center space-x-4">
+                <span><i class="fa-solid fa-bullhorn text-brand-500 mr-2"></i>【硕果集运通知】2026美西/美东线路普货拆包裹打包0服务费！</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <span><i class="fa-solid fa-headset mr-1 text-brand-500"></i> 客服热线: 400-888-9988 / +1 (800) 666-8899</span>
+                <div class="flex items-center space-x-2">
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-weixin"></i></a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 导航栏 Navigation -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- 品牌 LOGO -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-11 h-11 bg-brand-600 rounded-xl flex items-center justify-center text-white text-2xl font-bold shadow-md shadow-brand-500/20 group-hover:bg-brand-700 transition">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-bold tracking-tight text-slate-900 block leading-none">硕果<span class="text-brand-600">集运</span></span>
+                    <span class="text-[10px] tracking-widest text-slate-400 font-semibold uppercase">SHUOGUO LOGISTICS</span>
+                </div>
+            </a>
+
+            <!-- 主导航菜单 -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-700">
+                <a href="#home" class="text-brand-600 transition">首页</a>
+                <a href="#about" class="hover:text-brand-600 transition">关于硕果</a>
+                <a href="#services" class="hover:text-brand-600 transition">业务构成</a>
+                <a href="#warehouse" class="hover:text-brand-600 transition">美国海外仓</a>
+                <a href="#team" class="hover:text-brand-600 transition">团队风采</a>
+                <a href="#reviews" class="hover:text-brand-600 transition">客户反馈</a>
+                <a href="#contact" class="hover:text-brand-600 transition">联系我们</a>
+            </nav>
+
+            <!-- 操作按钮 -->
+            <div class="hidden sm:flex items-center space-x-3">
+                <button onclick="openModal('calcModal')" class="px-4 py-2 text-sm font-medium text-brand-600 bg-brand-50 hover:bg-brand-100 rounded-lg transition">
+                    <i class="fa-solid fa-calculator mr-1"></i> 运费估算
+                </button>
+                <a href="#contact" class="px-5 py-2.5 text-sm font-medium text-white bg-brand-600 hover:bg-brand-700 rounded-lg shadow-md shadow-brand-600/20 transition">
+                    免费咨询 / 寄件
+                </a>
+            </div>
+
+            <!-- 移动端菜单按钮 -->
+            <button id="menuBtn" class="md:hidden text-slate-700 hover:text-brand-600 focus:outline-none text-xl p-2">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- 移动端下拉导航 -->
+        <div id="mobileMenu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 pt-2 pb-6 space-y-3 text-sm font-medium text-slate-700">
+            <a href="#home" class="block py-2 text-brand-600">首页</a>
+            <a href="#about" class="block py-2 hover:text-brand-600">关于硕果</a>
+            <a href="#services" class="block py-2 hover:text-brand-600">业务构成</a>
+            <a href="#warehouse" class="block py-2 hover:text-brand-600">美国海外仓</a>
+            <a href="#team" class="block py-2 hover:text-brand-600">团队风采</a>
+            <a href="#reviews" class="block py-2 hover:text-brand-600">客户反馈</a>
+            <a href="#contact" class="block py-2 hover:text-brand-600">联系我们</a>
+            <div class="pt-2 flex flex-col gap-2">
+                <button onclick="openModal('calcModal')" class="w-full py-2.5 text-center font-medium text-brand-600 bg-brand-50 rounded-lg">运费估算</button>
+                <a href="#contact" class="w-full py-2.5 text-center font-medium text-white bg-brand-600 rounded-lg shadow">免费咨询 / 寄件</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. Hero 区域：简约大气的品牌视效与查询功能 -->
+    <section id="home" class="relative gradient-bg text-white py-20 lg:py-32 overflow-hidden">
+        <!-- 装饰性背景图形 -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 -left-20 w-80 h-80 bg-brand-500 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- 左侧标语与简介 -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs text-brand-100">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>专注中美跨境集运与海外仓服务 10+ 年</span>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+                        中美华人首选集运 <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-brand-100 to-white">
+                            使命必达·硕果累累
+                        </span>
+                    </h1>
+                    
+                    <p class="text-slate-300 text-base sm:text-lg max-w-2xl font-light leading-relaxed">
+                        为在美华人、留学生及跨境电商卖家提供高效、安全、省心的中国至全美包裹集运、私人物品搬家及自营海外仓一件代发服务。免费合箱打包、拍照核对，全程可视化追踪。
+                    </p>
+
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#contact" class="px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-xl shadow-lg shadow-brand-500/30 transition flex items-center group">
+                            立刻开始寄件 <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#warehouse" class="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-xl backdrop-blur-md transition">
+                            了解美国海外仓
+                        </a>
+                    </div>
+
+                    <!-- 信任优势标语 -->
+                    <div class="grid grid-cols-3 gap-4 pt-8 border-t border-white/10 max-w-lg mx-auto lg:mx-0 text-center">
+                        <div>
+                            <div class="text-2xl font-bold text-white">99.8%</div>
+                            <div class="text-xs text-slate-400">妥投准时率</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-white">50万+</div>
+                            <div class="text-xs text-slate-400">累计派送包裹</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-white">0元</div>
+                            <div class="text-xs text-slate-400">免费存储30天</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧查单 & 估算小工具卡片 -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white rounded-2xl p-6 sm:p-8 text-slate-800 shadow-2xl border border-slate-100 relative">
+                        <!-- 选项卡按钮 -->
+                        <div class="flex border-b border-slate-100 mb-6">
+                            <button id="tabTrackBtn" onclick="switchHeroTab('track')" class="flex-1 pb-3 text-center text-sm font-bold text-brand-600 border-b-2 border-brand-600 transition">
+                                <i class="fa-solid fa-magnifying-glass mr-1"></i> 包裹实时追踪
+                            </button>
+                            <button id="tabCalcBtn" onclick="switchHeroTab('calc')" class="flex-1 pb-3 text-center text-sm font-medium text-slate-400 border-b-2 border-transparent hover:text-slate-600 transition">
+                                <i class="fa-solid fa-calculator mr-1"></i> 快捷运费估算
+                            </button>
+                        </div>
+
+                        <!-- 查单面板 -->
+                        <div id="heroTrackPanel" class="space-y-4">
+                            <label class="block text-xs font-semibold text-slate-500 uppercase tracking-wider">输入硕果包裹单号 / 国内快递单号</label>
+                            <div class="relative">
+                                <input type="text" id="trackingInput" placeholder="例如: SG2026888999US" class="w-full px-4 py-3.5 pl-11 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 text-sm font-mono">
+                                <i class="fa-solid fa-barcode absolute left-4 top-4 text-slate-400"></i>
+                            </div>
+                            <button onclick="simulateTracking()" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-md transition flex items-center justify-center">
+                                <i class="fa-solid fa-paper-plane mr-2"></i> 查询物流动态
+                            </button>
+                            <!-- 查询结果模态展示区 -->
+                            <div id="trackingResult" class="hidden mt-4 p-4 bg-slate-50 rounded-xl text-xs space-y-2 border border-slate-100">
+                                <div class="flex justify-between font-bold text-slate-700">
+                                    <span>单号: SG2026888999US</span>
+                                    <span class="text-emerald-600"><i class="fa-solid fa-plane-arrival mr-1"></i>清关完成 / 派送中</span>
+                                </div>
+                                <p class="text-slate-500">[美西仓] 包裹已完成清关，由 UPS 接手末端派送。</p>
+                            </div>
+                        </div>
+
+                        <!-- 估算面板 -->
+                        <div id="heroCalcPanel" class="hidden space-y-4">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-500 mb-1">包裹重量 (kg)</label>
+                                    <input type="number" id="calcWeight" placeholder="如: 5" class="w-full px-3 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-500 mb-1">运输渠道</label>
+                                    <select id="calcChannel" class="w-full px-3 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white">
+                                        <option value="air_fast">空运特快专线 (5-7天)</option>
+                                        <option value="air_std">空运普货专线 (8-12天)</option>
+                                        <option value="sea_fast">海运快船美西 (15-20天)</option>
+                                        <option value="sea_slow">海运慢船超省 (25-30天)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button onclick="calculateFreight()" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow transition">
+                                计算预估费用
+                            </button>
+                            <div id="calcResult" class="hidden p-3 bg-brand-50 rounded-xl border border-brand-100 text-center">
+                                <span class="text-xs text-brand-800">预估运费总额约为：</span>
+                                <span id="calcPrice" class="text-xl font-bold text-brand-700 block">¥ 0.00</span>
+                                <span class="text-[10px] text-slate-400">*实际计费以仓库实测体积重量与实际重取大值为准</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                            <span><i class="fa-solid fa-shield-halved text-brand-600 mr-1"></i> 全全程丢损赔付保障</span>
+                            <a href="#contact" class="text-brand-600 hover:underline">联系人工客服 &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 关于硕果 About Us -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- 左侧图片组 -->
+                <div class="lg:col-span-6 relative">
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border border-slate-100">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80" alt="硕果国内集运仓" class="w-full h-80 sm:h-96 object-cover">
+                    </div>
+                    <!-- 浮动卡片 -->
+                    <div class="absolute -bottom-6 -right-6 z-20 bg-brand-900 text-white p-6 rounded-2xl shadow-xl hidden sm:block max-w-xs border border-brand-700">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <i class="fa-solid fa-award text-amber-400 text-2xl"></i>
+                            <h4 class="font-bold">品质跨境物流商</h4>
+                        </div>
+                        <p class="text-xs text-slate-300">拥有自研 WMS 仓储管理系统，包裹出入库实时扫描更新，保障物品零遗失。</p>
+                    </div>
+                </div>
+
+                <!-- 右侧文案 -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="inline-block px-3 py-1 bg-brand-50 text-brand-600 text-xs font-semibold rounded-md">ABOUT SHUOGUO</div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">
+                        深耕中美跨境物流 <br>
+                        <span class="text-brand-600">让家乡的好物与远方的你无缝相连接</span>
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                        硕果国际物流（Shuoguo Global Logistics）成立于 2016 年，总部位于中国深圳，并在美国洛杉矶与新泽西设立自营海外仓。公司致力于打造中美间最高效、透明、高性价比的私人物品集运与商业物流生态。
+                    </p>
+                    <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                        无论是淘宝/京东购物集运、食品零食、服装家具，还是跨境电商卖家的一件代发，硕果团队均提供从<strong>国内免费代收、拆箱精简打包、拍照验货、报关清关到美国末端派送</strong>的一站式全流程服务。
+                    </p>
+
+                    <!-- 服务亮点 -->
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-box font-bold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">免费打包拆箱</h4>
+                                <p class="text-xs text-slate-500">合理体积压缩，节省最高 40% 运费</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-8 h-8 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-warehouse font-bold"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm">自营美西/美东仓</h4>
+                                <p class="text-xs text-slate-500">双仓联动，全美派送 1-3 天达</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 核心业务构成 Core Services -->
+    <section id="services" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="px-3 py-1 bg-brand-100 text-brand-700 text-xs font-semibold rounded-md">OUR SERVICES</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">多元化跨境物流业务构成</h2>
+                <p class="text-slate-500 text-sm sm:text-base">精准匹配您的不同需求，提供从个人集运到企业大货的多元化产品方案</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- 业务卡片 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-plane-departure"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">中美空运集运专线</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                            适合时效要求高、体积小的包裹，如衣物、图书、数码产品及小食品。最快 5-7 天送达美国全境。
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2 border-t border-slate-100 pt-4">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-emerald-500 mr-2"></i>每周 5 班直飞航班</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-emerald-500 mr-2"></i>双清包税送到家</li>
+                    </ul>
+                </div>
+
+                <!-- 业务卡片 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-ship"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">中美海运快船专线</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                            美森快船/以星快船，适合大件行李、家具、大批量补货。价格极优，稳定时效 15-20 天。
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2 border-t border-slate-100 pt-4">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-emerald-500 mr-2"></i>美森(Matson)定班提柜</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-emerald-500 mr-2"></i>无盲目加价与杂费</li>
+                    </ul>
+                </div>
+
+                <!-- 业务卡片 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-warehouse"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">美国自营海外仓</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                            为亚马逊 FBA 卖家、TikTok Shop、Shopify 独立站卖家提供海外仓中转、退换货贴标与一件代发。
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2 border-t border-slate-100 pt-4">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-emerald-500 mr-2"></i>洛杉矶 & 新泽西双仓</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-emerald-500 mr-2"></i>支持 API 系统快速对接</li>
+                    </ul>
+                </div>
+
+                <!-- 业务卡片 4 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">双清关与特敏货专线</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">
+                            资深双签报关团队，专业承接零食食品、品牌服饰、化妆品、带电产品等敏感包裹。
+                        </p>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2 border-t border-slate-100 pt-4">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-emerald-500 mr-2"></i>查验率低，通关顺畅</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-emerald-500 mr-2"></i>合规申报保障安全</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 美国海外仓情况 US Warehouses -->
+    <section id="warehouse" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="px-3 py-1 bg-brand-100 text-brand-700 text-xs font-semibold rounded-md">US OVERSEAS WAREHOUSE</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">
+                        美国双自营海外仓 <br>
+                        <span class="text-brand-600">高效辐射全美末端派送</span>
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+                        硕果物流在美西（加州洛杉矶）和美东（新泽西州）拥有总计超 <strong>150,000 平方英尺</strong> 的标准化现代化自营仓库。凭借优越地理位置，极大地缩短了全美派送时效与运输成本。
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-brand-600 text-white flex items-center justify-center shrink-0 font-bold">美西</div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">洛杉矶安大略仓 (Ontario, CA)</h4>
+                                <p class="text-xs text-slate-500 mt-1">邻近长滩港 (Port of Long Beach) 与 LAX 机场，清关拆柜速度快，美西 Zone 1-3 区域次日达。</p>
+                            </div>
+                        </div>
+
+                        <!-- 新增：奇诺海外仓 (Chino Warehouse) -->
+                        <div class="p-4 bg-blue-50/70 rounded-xl border border-blue-100 flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0 font-bold">Chino</div>
+                            <div>
+                                <div class="flex items-center space-x-2">
+                                    <h4 class="font-bold text-slate-800">美西奇诺仓 (Chino, CA)</h4>
+                                    <span class="text-[10px] bg-brand-600 text-white px-1.5 py-0.5 rounded">旗舰仓</span>
+                                </div>
+                                <p class="text-xs text-slate-500 mt-1">位于美西物流枢纽 Chino，毗邻 60/71 号公路，专攻电商一件代发、大件货/家具中转拆柜及降本调拨。</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-brand-800 text-white flex items-center justify-center shrink-0 font-bold">美东</div>
+                            <div>
+                                <h4 class="font-bold text-slate-800">新泽西仓 (New Jersey, NJ)</h4>
+                                <p class="text-xs text-slate-500 mt-1">覆盖纽约及东海岸繁华经济圈，专为大货中转及东部包裹派送提供极速转运服务。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <a href="#contact" class="inline-flex items-center text-sm font-semibold text-brand-600 hover:text-brand-700">
+                            申请海外仓试用/对接优惠 <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 仓库展示图矩阵 -->
+                <div class="lg:col-span-7 grid grid-cols-2 gap-4">
+                    <div class="space-y-4">
+                        <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=600&q=80" alt="海外仓内部" class="rounded-2xl shadow-md w-full h-48 sm:h-64 object-cover">
+                        <div class="bg-brand-50 p-6 rounded-2xl border border-brand-100">
+                            <h4 class="font-bold text-brand-900 text-lg mb-1">智能 WMS 统管</h4>
+                            <p class="text-xs text-brand-700">库内扫描上架，订单处理准确率高于 99.9%</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-8">
+                        <div class="bg-brand-600 p-6 rounded-2xl text-white">
+                            <h4 class="font-bold text-lg mb-1">24h 监控监控保障</h4>
+                            <p class="text-xs text-brand-100">全天候安防系统与百万美金级货物仓储保险</p>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=600&q=80" alt="货物打包装车" class="rounded-2xl shadow-md w-full h-48 sm:h-64 object-cover">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 团队风采 Team -->
+    <section id="team" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="px-3 py-1 bg-brand-100 text-brand-700 text-xs font-semibold rounded-md">EXPERT TEAM</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">硕果专业团队风采</h2>
+                <p class="text-slate-500 text-sm sm:text-base">中美双边团队紧密协同，从客服咨询到仓库操作，为您全程保驾护航</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 团队成员 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 card-hover text-center p-6">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80" alt="团队成员" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover ring-4 ring-brand-50">
+                    <h3 class="font-bold text-slate-900 text-lg">Michael David</h3>
+                    <p class="text-xs text-brand-600 font-medium mb-3">美西海外仓运营总监</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        12年北美物流供应链管理经验，精通美西各港口卡车调度与 FBA 仓储规则。
+                    </p>
+                </div>
+
+                <!-- 团队成员 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 card-hover text-center p-6">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="团队成员" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover ring-4 ring-brand-50">
+                    <h3 class="font-bold text-slate-900 text-lg">陈微 (Vicky)</h3>
+                    <p class="text-xs text-brand-600 font-medium mb-3">国内集运中心客服负责人</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        带领 30 人专业客服团队，7×16小时在线解答集运包税、拆箱、路线选择疑问。
+                    </p>
+                </div>
+
+                <!-- 团队成员 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 card-hover text-center p-6">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" alt="团队成员" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover ring-4 ring-brand-50">
+                    <h3 class="font-bold text-slate-900 text-lg">张建国 (Alex)</h3>
+                    <p class="text-xs text-brand-600 font-medium mb-3">清关与关务风控顾问</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        前海关报关专家，专注中美跨境贸易海关政策，确保货物合规安全快速通关。
+                    </p>
+                </div>
+
+                <!-- 团队成员 4 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 card-hover text-center p-6">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80" alt="团队成员" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover ring-4 ring-brand-50">
+                    <h3 class="font-bold text-slate-900 text-lg">Sarah Jenkins</h3>
+                    <p class="text-xs text-brand-600 font-medium mb-3">美东仓客户对接经理</p>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        负责与 USPS、UPS、FedEx 等美国本土快递公司深度对接，协调末端派送效率。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 客户反馈 Customer Reviews -->
+    <section id="reviews" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="px-3 py-1 bg-brand-100 text-brand-700 text-xs font-semibold rounded-md">TESTIMONIALS</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">听听海外华人的真实口碑</h2>
+                <p class="text-slate-500 text-sm sm:text-base">服务上万名在美华人留学生及卖家，好评率保持 99% 以上</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- 评价卡片 1 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                    <div>
+                        <div class="text-amber-400 text-sm mb-4">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6 italic">
+                            “在纽约上学，买国内的东西寄过来一直很麻烦。硕果的小姐姐帮忙把淘宝买的十几样东西拆掉多余纸盒，压缩体积后打包成一个大箱子，省了将近一半运费！空运 7 天就到了，包裹完好！”
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-3 pt-4 border-t border-slate-200/60">
+                        <div class="w-10 h-10 rounded-full bg-brand-500 text-white font-bold flex items-center justify-center text-sm">
+                            Lin
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">Linda Zhao</h4>
+                            <p class="text-xs text-slate-400">纽约哥伦比亚大学留学生</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 评价卡片 2 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                    <div>
+                        <div class="text-amber-400 text-sm mb-4">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6 italic">
+                            “我们是做 Amazon 独立站的，合作硕果的洛杉矶海外仓快两年了。他们的 WMS 系统很顺手，一件代发从没出过错，末端 UPS 的折扣给的也很低，帮我们节省了很多综合成本。”
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-3 pt-4 border-t border-slate-200/60">
+                        <div class="w-10 h-10 rounded-full bg-brand-700 text-white font-bold flex items-center justify-center text-sm">
+                            陈
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">David Chen</h4>
+                            <p class="text-xs text-slate-400">加州跨境电商卖家</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 评价卡片 3 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 flex flex-col justify-between">
+                    <div>
+                        <div class="text-amber-400 text-sm mb-4">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6 italic">
+                            “寄了一些老家特色零食和干货到休斯顿，原本担心过海关被扣，硕果的客服给出了很详细的申报建议走敏感货专线，双清包税非常省心！下次还会继续用硕果。”
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-3 pt-4 border-t border-slate-200/60">
+                        <div class="w-10 h-10 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-sm">
+                            王
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">王女士</h4>
+                            <p class="text-xs text-slate-400">休斯顿定居华人</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. 联系方式 Contact Us -->
+    <section id="contact" class="py-20 bg-slate-900 text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                
+                <!-- 左侧联系信息 -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="px-3 py-1 bg-brand-500/20 text-brand-300 text-xs font-semibold rounded-md border border-brand-500/30">CONTACT US</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold mt-4">随时联系硕果团队</h2>
+                        <p class="text-slate-400 text-sm mt-2">无论您是个人打包寄件，还是企业海外仓业务洽谈，我们都竭诚为您解答。</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-600/30 border border-brand-500/40 text-brand-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">中国集运仓总部地址</h4>
+                                <p class="text-xs text-slate-400 mt-1">广东省深圳市宝安区福永街道跨境物流园 A 栋 101-105</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-600/30 border border-brand-500/40 text-brand-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-warehouse"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">美国自营海外仓地址 (Chino & Ontario & NJ)</h4>
+                                <p class="text-xs text-slate-400 mt-1"><span class="text-white font-medium">奇诺旗舰仓：</span>13880 Monte Vista Ave, Chino, CA 91710, USA</p>
+                                <p class="text-xs text-slate-400 mt-0.5"><span class="text-white font-medium">安大略仓：</span>1280 S Vintage Ave, Ontario, CA 91761, USA</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-xl bg-brand-600/30 border border-brand-500/40 text-brand-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">电话与邮箱</h4>
+                                <p class="text-xs text-slate-400 mt-1">中国客服: +86 400-888-9988 | 美国服务: +1 (800) 666-8899</p>
+                                <p class="text-xs text-slate-400">邮箱: support@shuoguologistics.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 官方微信二维码占位 -->
+                    <div class="p-4 bg-slate-800/80 rounded-2xl border border-slate-700/60 inline-flex items-center space-x-4">
+                        <div class="w-20 h-20 bg-white p-2 rounded-xl flex items-center justify-center shrink-0">
+                            <!-- 二维码示意 -->
+                            <i class="fa-solid fa-qrcode text-slate-900 text-5xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm">添加一对一专属微信客服</h4>
+                            <p class="text-xs text-slate-400 mt-1">微信号: <span class="text-brand-400 font-mono">ShuoguoExpress</span></p>
+                            <span class="inline-block mt-2 text-[10px] bg-brand-600 text-white px-2 py-0.5 rounded">扫码加微信领 50 元首单优惠券</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右侧在线留言表单 -->
+                <div class="lg:col-span-7 bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                    <h3 class="text-xl font-bold mb-6 flex items-center">
+                        <i class="fa-solid fa-paper-plane text-brand-500 mr-2"></i> 在线预约寄件 / 业务咨询
+                    </h3>
+                    <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">您的姓名 *</label>
+                                <input type="text" required placeholder="如: 张先生 / Alice" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-sm focus:outline-none focus:border-brand-500 text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">联系电话 / 微信号 *</label>
+                                <input type="text" required placeholder="手机号或微信" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-sm focus:outline-none focus:border-brand-500 text-white">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">咨询业务类型</label>
+                                <select class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-sm focus:outline-none focus:border-brand-500 text-white">
+                                    <option>个人淘宝/拼多多集运</option>
+                                    <option>敏感货物 (食品/药品/化妆品)</option>
+                                    <option>海运大件 / 家具搬家</option>
+                                    <option>美国海外仓中转与一件代发</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">目的地州/城市 (美国)</label>
+                                <input type="text" placeholder="如: California, CA" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-sm focus:outline-none focus:border-brand-500 text-white">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">备注说明 (物品种类、大致重量或特殊需求)</label>
+                            <textarea rows="4" placeholder="请简要描述您的寄件需求..." class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl text-sm focus:outline-none focus:border-brand-500 text-white"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl shadow-lg transition">
+                            提交咨询需求
+                        </button>
+                        <p id="formAlert" class="hidden text-xs text-center text-emerald-400 pt-2">
+                            <i class="fa-solid fa-circle-check mr-1"></i> 提交成功！我们的客服团队将在 30 分钟内联系您。
+                        </p>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 Footer -->
+    <footer class="bg-slate-950 text-slate-400 text-xs py-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <!-- Footer Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-bold">
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+                    <span class="text-base font-bold text-white">硕果集运 Shuoguo Logistics</span>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-6 text-slate-400">
+                    <a href="#about" class="hover:text-white transition">关于我们</a>
+                    <a href="#services" class="hover:text-white transition">服务条款</a>
+                    <a href="#warehouse" class="hover:text-white transition">禁寄物品说明</a>
+                    <a href="#contact" class="hover:text-white transition">隐私政策</a>
+                </div>
+
+                <div class="text-slate-500">
+                    &copy; 2026 硕果国际物流 Shuoguo Logistics. All Rights Reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 运费估算弹出模态框 Modal -->
+    <div id="calcModal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <button onclick="closeModal('calcModal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center">
+                <i class="fa-solid fa-calculator text-brand-600 mr-2"></i> 硕果集运 - 运费试算器
+            </h3>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">包裹实际重量 (kg)</label>
+                    <input type="number" id="mWeight" placeholder="例如: 10" class="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">长 (cm)</label>
+                        <input type="number" id="mLength" placeholder="30" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">宽 (cm)</label>
+                        <input type="number" id="mWidth" placeholder="30" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">高 (cm)</label>
+                        <input type="number" id="mHeight" placeholder="30" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">选择线路渠道</label>
+                    <select id="mChannel" class="w-full px-3 py-2.5 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none">
+                        <option value="air_fast">空运特快 (5-7天) - 首重¥120, 续重¥45/0.5kg</option>
+                        <option value="air_std">空运普货 (8-12天) - 首重¥90, 续重¥35/0.5kg</option>
+                        <option value="sea_fast">海运美森快船 (15-20天) - 低至 ¥15/kg</option>
+                    </select>
+                </div>
+                <button onclick="calculateModalFreight()" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow transition">
+                    立即试算
+                </button>
+                <div id="modalResult" class="hidden p-4 bg-brand-50 rounded-xl border border-brand-100 text-center space-y-1">
+                    <span class="text-xs text-slate-600">预估结算费用：</span>
+                    <div id="modalPrice" class="text-2xl font-bold text-brand-700">¥ 0.00</div>
+                    <p class="text-[10px] text-slate-400">计费体积重: <span id="modalVolWeight">0</span> kg (长×宽×高/6000)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript 交互逻辑 -->
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 切换 Hero 卡片 Tab
+        function switchHeroTab(tab) {
+            const trackBtn = document.getElementById('tabTrackBtn');
+            const calcBtn = document.getElementById('tabCalcBtn');
+            const trackPanel = document.getElementById('heroTrackPanel');
+            const calcPanel = document.getElementById('heroCalcPanel');
+
+            if (tab === 'track') {
+                trackBtn.className = "flex-1 pb-3 text-center text-sm font-bold text-brand-600 border-b-2 border-brand-600 transition";
+                calcBtn.className = "flex-1 pb-3 text-center text-sm font-medium text-slate-400 border-b-2 border-transparent hover:text-slate-600 transition";
+                trackPanel.classList.remove('hidden');
+                calcPanel.classList.add('hidden');
+            } else {
+                calcBtn.className = "flex-1 pb-3 text-center text-sm font-bold text-brand-600 border-b-2 border-brand-600 transition";
+                trackBtn.className = "flex-1 pb-3 text-center text-sm font-medium text-slate-400 border-b-2 border-transparent hover:text-slate-600 transition";
+                calcPanel.classList.remove('hidden');
+                trackPanel.classList.add('hidden');
+            }
+        }
+
+        // 模拟查单逻辑
+        function simulateTracking() {
+            const input = document.getElementById('trackingInput').value;
+            const res = document.getElementById('trackingResult');
+            if (!input.trim()) {
+                alert('请输入有效快递单号！');
+                return;
+            }
+            res.classList.remove('hidden');
+        }
+
+        // 首页简易运费计算
+        function calculateFreight() {
+            const weight = parseFloat(document.getElementById('calcWeight').value) || 0;
+            const channel = document.getElementById('calcChannel').value;
+            const res = document.getElementById('calcResult');
+            const priceEl = document.getElementById('calcPrice');
+
+            if (weight <= 0) {
+                alert('请输入有效的包裹重量');
+                return;
+            }
+
+            let totalPrice = 0;
+            if (channel === 'air_fast') {
+                totalPrice = 120 + Math.max(0, (weight * 2 - 1)) * 45;
+            } else if (channel === 'air_std') {
+                totalPrice = 90 + Math.max(0, (weight * 2 - 1)) * 35;
+            } else if (channel === 'sea_fast') {
+                totalPrice = Math.max(weight * 22, 180);
+            } else {
+                totalPrice = Math.max(weight * 15, 150);
+            }
+
+            priceEl.innerText = `¥ ${totalPrice.toFixed(2)}`;
+            res.classList.remove('hidden');
+        }
+
+        // 模态框控制
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // 弹窗高级运费试算（计算体积重）
+        function calculateModalFreight() {
+            const w = parseFloat(document.getElementById('mWeight').value) || 0;
+            const l = parseFloat(document.getElementById('mLength').value) || 0;
+            const width = parseFloat(document.getElementById('mWidth').value) || 0;
+            const h = parseFloat(document.getElementById('mHeight').value) || 0;
+            const channel = document.getElementById('mChannel').value;
+
+            const volWeight = (l * width * h) / 6000;
+            const finalWeight = Math.max(w, volWeight);
+
+            if (finalWeight <= 0) {
+                alert('请填写正确的重量与尺寸信息');
+                return;
+            }
+
+            let cost = 0;
+            if (channel === 'air_fast') {
+                cost = 120 + Math.max(0, (finalWeight * 2 - 1)) * 45;
+            } else if (channel === 'air_std') {
+                cost = 90 + Math.max(0, (finalWeight * 2 - 1)) * 35;
+            } else {
+                cost = Math.max(finalWeight * 22, 180);
+            }
+
+            document.getElementById('modalVolWeight').innerText = volWeight.toFixed(2);
+            document.getElementById('modalPrice').innerText = `¥ ${cost.toFixed(2)}`;
+            document.getElementById('modalResult').classList.remove('hidden');
+        }
+
+        // 表单提交反馈
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const alertText = document.getElementById('formAlert');
+            alertText.classList.remove('hidden');
+            setTimeout(() => {
+                alertText.classList.add('hidden');
+                e.target.reset();
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
